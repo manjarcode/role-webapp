@@ -5,7 +5,7 @@ import Config from '../config'
 
 class ServicesFactory {
     static updateService = ({user}) => {
-
+        console.log('create instance')
         //TODO: Using window to create singleton instances not sure if its the best
         const isInstanceOf = window.updateService instanceof UpdateService
 

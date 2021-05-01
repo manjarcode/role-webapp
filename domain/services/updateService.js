@@ -16,7 +16,7 @@ class UpdateService {
         })
     }
 
-    subscribe({ onChange}) {
+    subscribe({onChange}) {
         this._observable.subscribe(onChange)
     }
 }
