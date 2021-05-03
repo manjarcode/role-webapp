@@ -13,7 +13,11 @@ const App = () => {
       { !user && <Login user={user} onUserChange={setUser}/> }
       { user && 
         <UpdaterContext.Provider value={ 
-          {updateService: ServicesFactory.updateService({user})}
+          {
+            updateService: ServicesFactory.updateService({user}),
+            userService: ServicesFactory.userService(),
+            rollService: ServicesFactory.rollService()
+          }
         }>
           <Dashboard user={user} />
         </UpdaterContext.Provider>}

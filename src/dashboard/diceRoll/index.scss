@@ -1,0 +1,23 @@
+.diceRoll {
+    list-style: none;
+    display: flex;
+
+    &-user {
+        font-weight: bold;
+    }
+    &-dice {
+
+        padding: 0.5em;
+
+        &-success {
+            background-color: green;
+            color: black;
+        }
+    
+        &-fail {
+            background-color: red;
+            color: white;
+        }
+    }
+   
+}

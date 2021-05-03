@@ -1,6 +1,7 @@
 import {useState, useEffect, useContext} from "react"
 import ServicesFactory from '../../domain/services/factory'
 import UpdaterContext from '../UpdaterContext'
+import DiceRoll from "./diceRoll"
 import UserList from './userList'
 
 const Message = ({message}) => {
@@ -37,7 +38,7 @@ const Dashboard = ({user}) => {
                     return <Message message={item} key={item.timestamp}/>
                 })
             }
-
+            <DiceRoll />
         </div>
     ) 
 }

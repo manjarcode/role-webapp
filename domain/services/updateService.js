@@ -10,8 +10,11 @@ class UpdateService {
         this._repeater.execute( async () => {
             if (!!this._user) {
                 const events = await this._updateRepository.execute({user})
-                //produce message
-                this._observable.notify(events)
+
+                //produce messages       
+                events.forEach(item => {
+                    this._observable.notify(item)
+                })
             }
         })
     }

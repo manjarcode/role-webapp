@@ -2,6 +2,8 @@ import Repeater from "./repeater"
 import UpdateRepository from "../repositories/updateRepository"
 import UpdateService from "./updateService"
 import Config from '../config'
+import UserService from "./userService"
+import RollService from "./rollService"
 
 class ServicesFactory {
     static updateService = ({user}) => {
@@ -20,6 +22,16 @@ class ServicesFactory {
 
         return window.updateService
     }
+
+    static userService = () => new UserService({
+        //TODO: Hay que ver como resolvemos el usuario hacerlo cada vez no tiene sentido
+        updateService: ServicesFactory.updateService({})
+    })
+
+    static rollService = () => new RollService({
+        //TODO: Hay que ver como resolvemos el usuario hacerlo cada vez no tiene sentido
+        updateService: ServicesFactory.updateService({})
+    })
 }
 
 export default ServicesFactory
