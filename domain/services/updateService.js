@@ -7,7 +7,7 @@ class UpdateService {
         this._observable = new Observable
         this._user = user
 
-        this._repeater.execute( async () => {
+        this._repeater.execute(async () => {
             if (!!this._user) {
                 const events = await this._updateRepository.execute({user})
 
