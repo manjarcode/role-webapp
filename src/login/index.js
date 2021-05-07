@@ -1,29 +1,28 @@
-import {useState} from 'react'
+import {useState, useContext} from 'react'
 import Button from '@s-ui/react-atom-button'
 import Input from '@s-ui/react-molecule-input-field'
-import LoginRepository from '../../domain/loginRepository'
 import Modal from '@s-ui/react-molecule-modal'
+import UpdaterContext from '../UpdaterContext'
 
-const Login = ({user, onUserChange}) => {
-    const display = user 
-    const [userInput, setUserInput] = useState('')
+const Login = ({onUserChange}) => {
+    const {loginService} = useContext(UpdaterContext)
+    const [user, setUser] = useState('')
 
     const onChange = (_,{value}) => {
-        setUserInput(value)
+        setUser(value)
     }
 
-    const onClick = async()=> {
-        const repo = new LoginRepository()
-        await repo.execute(userInput)
-        onUserChange(userInput)
+    const onClick = async ()=> {
+        await loginService.execute({user})
+        onUserChange(user)
     }
 
     return(
         <Modal 
-            isOpen={!user}
+            isOpen={true}
             header={<span>Login</span>}
         >
-            <Input label="Nombre de usuario:" value={userInput} onChange={onChange} />
+            <Input label="Nombre de usuario:" value={user} onChange={onChange} />
             <Button onClick={onClick}>Enviar</Button>
         </Modal>)
 }

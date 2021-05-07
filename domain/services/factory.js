@@ -4,10 +4,11 @@ import UpdateService from "./updateService"
 import Config from '../config'
 import UserService from "./userService"
 import RollService from "./rollService"
+import LoginService from "./loginService"
+import RepositoryFactory from "../repositories/factory"
 
 class ServicesFactory {
-    static updateService = ({user}) => {
-        console.log('create instance')
+    static updateService = () => {
         //TODO: Using window to create singleton instances not sure if its the best
         const isInstanceOf = window.updateService instanceof UpdateService
 
@@ -16,21 +17,33 @@ class ServicesFactory {
             : new UpdateService({
                 updateRepository: new UpdateRepository(),
                 repeater: new Repeater({
-                    timeout: Config.REPEATER_DEFAULT_TIMEOUT}),
-                user: user
+                    timeout: Config.REPEATER_DEFAULT_TIMEOUT})
             })
 
         return window.updateService
     }
 
-    static userService = () => new UserService({
-        //TODO: Hay que ver como resolvemos el usuario hacerlo cada vez no tiene sentido
+    static userService = () => {
+        //TODO: Use DI container
+
+        const isInstanceOf = window.userService instanceof UserService
+        window.userService = isInstanceOf 
+            ? window.userService 
+            : new UserService({
+                updateService: ServicesFactory.updateService({})
+            })
+
+        return window.userService
+    }
+
+    static rollService = () => new RollService({
         updateService: ServicesFactory.updateService({})
     })
 
-    static rollService = () => new RollService({
-        //TODO: Hay que ver como resolvemos el usuario hacerlo cada vez no tiene sentido
-        updateService: ServicesFactory.updateService({})
+    static loginService = () => new LoginService({
+        loginRepository: RepositoryFactory.loginRepository(),
+        userService: ServicesFactory.userService(),
+        updateService: ServicesFactory.updateService()
     })
 }
 

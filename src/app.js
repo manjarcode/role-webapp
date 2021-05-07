@@ -8,19 +8,20 @@ import Login from './login'
 
 const App = () => {
   const [user, setUser] = useState()
+
   return (
     <>
-      { !user && <Login user={user} onUserChange={setUser}/> }
-      { user && 
-        <UpdaterContext.Provider value={ 
+      <UpdaterContext.Provider value={ 
           {
             updateService: ServicesFactory.updateService({user}),
             userService: ServicesFactory.userService(),
-            rollService: ServicesFactory.rollService()
+            rollService: ServicesFactory.rollService(),
+            loginService: ServicesFactory.loginService()
           }
         }>
-          <Dashboard user={user} />
-        </UpdaterContext.Provider>}
+          { !user && <Login user={user} onUserChange={setUser} /> }
+          { user && <Dashboard user={user} /> }
+      </UpdaterContext.Provider>
     </>
 
   )
