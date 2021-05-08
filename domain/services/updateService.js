@@ -21,7 +21,13 @@ class UpdateService {
         })
     }
 
+    on(callback) {
+        this._observable.subscribe(callback)
+    }
+
+    //DEPRECATED
     subscribe({onChange}) {
+        console.log('UpdateService.subscribe is deprecated and will soon be removed, use .on instead')
         this._observable.subscribe(onChange)
     }
 

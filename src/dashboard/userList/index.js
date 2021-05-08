@@ -4,6 +4,7 @@ import UpdaterContext from '../../UpdaterContext'
 const UserList = ({}) => {
     const [users, setUsers] = useState()
     const {container, TYPES} = useContext(UpdaterContext)
+    const BASE = 'userList'
 
     useEffect(() => {
         const userService = container.get(TYPES.UserService)
@@ -13,9 +14,9 @@ const UserList = ({}) => {
 
     }, [])
 
-    return (<ul>
+    return (<ul className={BASE}>
         {users?.map((item, index) => 
-            <li key={index}>{item}</li>
+            <li className={`${BASE}-item`} key={index}>{item}</li>
         )}
     </ul>)
 }
