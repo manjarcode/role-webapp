@@ -2,8 +2,8 @@ import ConsumerService from "./consumerService"
 
 class UserService extends ConsumerService {
 
-    constructor ({updateService}) {
-        super({updateService})
+    constructor (updateService) {
+        super(updateService)
         this._users = []
     }
 
@@ -17,8 +17,12 @@ class UserService extends ConsumerService {
 
     _handleLogin({body}) {
         const {user} = body
-        console.log('login handled', user)
-        this._users.push(user)
+
+        const isLogged = this._users.includes(user)
+        if (!isLogged){
+            this._users.push(user)
+        }
+        
         this._observable.notify(this._users)
     }
 

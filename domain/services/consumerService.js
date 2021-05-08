@@ -1,7 +1,7 @@
 import Observable from "./observable"
 
 class ConsumerService {
-    constructor({updateService}) {
+    constructor(updateService) {
         this._updateService = updateService
         this._observable = new Observable
 

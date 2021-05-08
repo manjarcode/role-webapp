@@ -1,9 +1,11 @@
 import Observable from "./observable"
+import Repeater from "./repeater"
 
 class UpdateService {
-    constructor({updateRepository, repeater}) {
+    constructor(updateRepository) {
         this._updateRepository = updateRepository
-        this._repeater = repeater
+        //TODO: Fix this dependency
+        this._repeater = new Repeater({timeout: 1000})
         this._observable = new Observable
         this._user = undefined
         

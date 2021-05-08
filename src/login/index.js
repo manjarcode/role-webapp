@@ -5,7 +5,7 @@ import Modal from '@s-ui/react-molecule-modal'
 import UpdaterContext from '../UpdaterContext'
 
 const Login = ({onUserChange}) => {
-    const {loginService} = useContext(UpdaterContext)
+    const {container, TYPES} = useContext(UpdaterContext)
     const [user, setUser] = useState('')
 
     const onChange = (_,{value}) => {
@@ -13,6 +13,7 @@ const Login = ({onUserChange}) => {
     }
 
     const onClick = async ()=> {
+        const loginService = container.get(TYPES.LoginService)
         await loginService.execute({user})
         onUserChange(user)
     }

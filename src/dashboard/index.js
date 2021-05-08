@@ -13,7 +13,7 @@ const Message = ({message}) => {
 const Dashboard = ({user}) => {
     const [msg, setMsg] = useState([])
 
-    const {updateService} = useContext(UpdaterContext)
+    const {container, TYPES} = useContext(UpdaterContext)
 
     const onChange = data => {
         setMsg(prev => [...prev, ...data])
@@ -22,7 +22,7 @@ const Dashboard = ({user}) => {
     useEffect(()=> {
         if (!user) return
 
-        const updateService = ServicesFactory.updateService({user})
+        const updateService = container.get(TYPES.UpdateService)
         updateService.subscribe({ 
             user, 
             onChange

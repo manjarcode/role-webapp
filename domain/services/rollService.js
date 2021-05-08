@@ -2,8 +2,8 @@ import ConsumerService from "./consumerService"
 
 class RollService extends ConsumerService {
 
-    constructor({updateService}) {
-        super({updateService})
+    constructor(updateService) {
+        super(updateService)
     }
 
     _eventMapper(type) {

@@ -1,5 +1,5 @@
 class LoginService {
-    constructor({loginRepository, userService, updateService}) {
+    constructor(loginRepository, userService, updateService) {
         this._loginRepository = loginRepository
         this._userService = userService
         this._updateService = updateService
