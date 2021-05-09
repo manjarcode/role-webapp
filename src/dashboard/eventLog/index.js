@@ -1,7 +1,7 @@
 import React, {useEffect, useState, useContext} from 'react'
 import UpdaterContext from '../../UpdaterContext'
 
-const Message = ({event}) => {
+const Event = ({event}) => {
     const {timestamp, type, body} = event
 
     const formatTimestamp = timestamp => {
@@ -16,22 +16,22 @@ const Message = ({event}) => {
 
 const BASE = 'eventLog'
 const EventLog = () => {
-    const [msg, setMsg] = useState([])
-
+    const [events, setEvents] = useState([])
     const {container, TYPES} = useContext(UpdaterContext)
+
     useEffect(()=> {
         const updateService = container.get(TYPES.UpdateService)
         updateService.on(event => {
             console.log('event recieved', event)
-            setMsg(prev => [event, ...prev])
+            setEvents(prev => [event, ...prev])
         })
-    })
+    }, [])
 
     return (   
         <div className={BASE}>
             { 
-                msg && msg.map((event, index) => {
-                    return <Message event={event} key={index}/>
+                events?.map((event, index) => {
+                    return <Event event={event} key={index}/>
                 })
             }
         </div>)

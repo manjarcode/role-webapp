@@ -25,6 +25,7 @@
     "@s-ui/react-molecule-modal": "^1.31.0",
     "@s-ui/theme": "^8.94.0",
     "inversify": "^5.1.1",
+    "lodash.clonedeep": "^4.5.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "reflect-metadata": "^0.1.13"

@@ -16,9 +16,7 @@ const DiceRoll = ({}) => {
  
     useEffect(() => {
         const rollService = container.get(TYPES.RollService)
-        rollService.get(dto => {
-            setRolling(dto)
-        })
+        rollService.on(setRolling)
     }, [])
 
     return (<>

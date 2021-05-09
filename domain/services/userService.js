@@ -23,14 +23,14 @@ class UserService extends ConsumerService {
             this._users.push(user)
         }
         
-        this._observable.notify(this._users)
+        this._notify(this._users)
     }
 
     _handleLogout() {
     }
 
     on(callback) {
-        this._observable.subscribe(callback)
+        this._on(callback)
     }
 
     get() {
@@ -39,7 +39,7 @@ class UserService extends ConsumerService {
 
     set(users) {
         this._users.push(...users)
-        this._observable.notify(this._users)
+        this._notify(this._users)
     }
 }
 

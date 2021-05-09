@@ -1,3 +1,5 @@
+import clonedeep from 'lodash.clonedeep'
+
 class Observable {
     constructor() {
         this._observer = []
@@ -7,10 +9,11 @@ class Observable {
         this._observer.push(callback)
     }
 
-    notify(data) {
+    notify(value) {
+        const cloned = clonedeep(value)
         Array.prototype.forEach.call(this._observer, 
             item => {
-                item.call(null, data)
+                item.call(null, cloned)
             }
         )
     }

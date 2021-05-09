@@ -15,12 +15,11 @@ class RollService extends ConsumerService {
 
     _onRoll(event) {
         const {body} = event
-        console.log('roll event', body)
-        this._observable.notify(body)
+        this._notify(body)
     }
 
-    get(callback) {
-        return this._observable.subscribe(callback)
+    on(callback) {
+        this._on(callback)
     }
 }
 

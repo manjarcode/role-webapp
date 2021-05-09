@@ -19,6 +19,14 @@ class ConsumerService {
     _eventMapper(type) {
         throw new Error("Must be implemented")
     }
+
+    _notify(value) {
+        this._observable.notify(value)
+    }
+
+    _on(callback) {
+        this._observable.subscribe(callback)
+    }
 }
 
 export default ConsumerService
