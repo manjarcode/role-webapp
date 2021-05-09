@@ -18,15 +18,25 @@ class UserService extends ConsumerService {
     _handleLogin({body}) {
         const {user} = body
 
-        const isLogged = this._users.includes(user)
-        if (!isLogged){
+        if (!this._hasUser(user)){
             this._users.push(user)
         }
         
         this._notify(this._users)
     }
 
-    _handleLogout() {
+    _handleLogout({body}) {
+        const {user} = body
+
+        if (this._hasUser(user)) {
+            this._users = this._users.filter(u => u !== user)
+        }
+        
+        this._notify(this._users)
+    }
+
+    _hasUser(user) {
+        return this._users.includes(user)
     }
 
     on(callback) {
@@ -38,7 +48,7 @@ class UserService extends ConsumerService {
     }
 
     set(users) {
-        this._users.push(...users)
+        this._users = users
         this._notify(this._users)
     }
 }

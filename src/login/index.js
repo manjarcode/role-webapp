@@ -15,7 +15,6 @@ const Login = ({onUserChange}) => {
     const onClick = async ()=> {
         const loginService = container.get(TYPES.LoginService)
         await loginService.execute({user})
-        onUserChange(user)
     }
 
     return(

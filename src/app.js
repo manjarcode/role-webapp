@@ -1,6 +1,5 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {render} from 'react-dom'
-import ServicesFactory from '../domain/services/factory'
 import Dashboard from './dashboard'
 import './index.scss'
 import UpdaterContext from './UpdaterContext'
@@ -10,18 +9,19 @@ import container, {TYPES} from '../domain/container'
 const App = () => {
   const [user, setUser] = useState()
 
+  useEffect(()=> {
+    const updateService = container.get(TYPES.UpdateService)
+    updateService.onUserChanged(setUser)
+  }, [])
   return (
     <>
       <UpdaterContext.Provider value={ 
           {
             container,
-            TYPES,
-            updateService: container.get(TYPES.UpdateService),
-            userService: container.get(TYPES.UserService),
-            loginService: container.get(TYPES.LoginService)
+            TYPES
           }
         }>
-          { !user && <Login user={user} onUserChange={setUser} /> }
+          { !user && <Login user={user} /> }
           { user && <Dashboard user={user} /> }
       </UpdaterContext.Provider>
     </>
