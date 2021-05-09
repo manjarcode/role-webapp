@@ -5,18 +5,25 @@
     &-user {
         font-weight: bold;
     }
+
     &-dice {
 
-        padding: 0.5em;
+        width: 3em;
+        padding: 1em 0em;
+        margin: 5px;
+        border: 1px solid #333333;
+        font-size: 1.2em;
+        font-weight: bold;
+        color: #000000;
+        box-shadow: 0 4px 10px 0 rgb(0 0 0 / 30%), 0 4px 10px 0 rgb(0 0 0 / 30%);
+        text-align: center;
 
         &-success {
-            background-color: green;
-            color: black;
+            background-color: #88aa55;
         }
     
         &-fail {
-            background-color: red;
-            color: white;
+            background-color: #f07070;
         }
     }
    

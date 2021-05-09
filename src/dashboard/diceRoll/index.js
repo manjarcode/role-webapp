@@ -11,12 +11,12 @@ const Dice = ({roll}) => {
 }
 
 const DiceRoll = ({}) => {
-    const {rollService} = useContext(UpdaterContext)
+    const {container, TYPES} = useContext(UpdaterContext)
     const [rolling, setRolling] = useState()
  
     useEffect(() => {
+        const rollService = container.get(TYPES.RollService)
         rollService.get(dto => {
-debugger
             setRolling(dto)
         })
     }, [])

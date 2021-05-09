@@ -1,1 +1,22 @@
 @import './diceRoll/index.scss';
+@import './userList/index.scss';
+@import './eventLog/index.scss';
+
+.dashboard {
+    display: flex;
+    height: 100%;
+
+    &-main {
+        width: 80%;
+        display:flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    &-sidebar {
+        background-color: #fafafa;
+        width: 20%;
+        height: 100%;
+        font-size: 1.3em;
+    }
+}
