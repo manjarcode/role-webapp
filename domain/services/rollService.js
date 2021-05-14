@@ -1,26 +1,32 @@
-import ConsumerService from "./consumerService"
+import ConsumerService from './consumerService'
 
 class RollService extends ConsumerService {
+  constructor(updateService, rollRepository) {
+    super(updateService)
 
-    constructor(updateService) {
-        super(updateService)
-    }
+    this._rollRepository = rollRepository
+  }
 
-    _eventMapper(type) {
-        const mapping = {
-            'roll': this._onRoll.bind(this)
-        }
-        return mapping[type]
+  _eventMapper(type) {
+    const mapping = {
+      roll: this._onRoll.bind(this)
     }
+    return mapping[type]
+  }
 
-    _onRoll(event) {
-        const {body} = event
-        this._notify(body)
-    }
+  _onRoll(event) {
+    const {body} = event
+    this._notify(body)
+  }
 
-    on(callback) {
-        this._on(callback)
-    }
+  on(callback) {
+    this._on(callback)
+  }
+
+  roll({difficult, dicesCount}) {
+    const user = 'manjar'
+    this._rollRepository.execute({user, difficult, dicesCount})
+  }
 }
 
 export default RollService
