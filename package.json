@@ -21,11 +21,14 @@
   "dependencies": {
     "@s-ui/react-atom-button": "^1.65.0",
     "@s-ui/react-atom-input": "^5.3.0",
+    "@s-ui/react-atom-slider": "^1.18.0",
+    "@s-ui/react-molecule-field": "^1.29.0",
     "@s-ui/react-molecule-input-field": "^4.3.0",
     "@s-ui/react-molecule-modal": "^1.31.0",
     "@s-ui/theme": "^8.94.0",
     "inversify": "^5.1.1",
     "lodash.clonedeep": "^4.5.0",
+    "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "reflect-metadata": "^0.1.13"
