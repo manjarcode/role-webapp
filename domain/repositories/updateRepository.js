@@ -1,5 +1,7 @@
 import UnauthorizedError from '../errors/UnauthorizedError'
+import {injectable} from 'inversify'
 
+@injectable()
 class UpdateRepository {
   // TODO: El host tiene que venir de la config
   static ENDPOINT = 'http://localhost:3001/retrieve'

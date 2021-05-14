@@ -1,3 +1,6 @@
+import {injectable} from 'inversify'
+
+@injectable()
 class LoginRepository {
   // TODO: El host tiene que venir de la config
   static ENDPOINT = 'http://localhost:3001/login'

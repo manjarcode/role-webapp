@@ -1,5 +1,7 @@
 import ConsumerService from './consumerService'
+import {injectable} from 'inversify'
 
+@injectable()
 class RollService extends ConsumerService {
   constructor(updateService, rollRepository) {
     super(updateService)

@@ -1,54 +1,58 @@
-import UnauthorizedError from "../errors/UnauthorizedError"
-import Observable from "./observable"
-import Repeater from "./repeater"
+import UnauthorizedError from '../errors/UnauthorizedError'
+import Observable from './observable'
+import Repeater from './repeater'
+import {injectable} from 'inversify'
 
+@injectable()
 class UpdateService {
-    constructor(updateRepository) {
-        this._updateRepository = updateRepository
-        //TODO: Fix this dependency
-        this._repeater = new Repeater({timeout: 1000})
-        this._eventsObservable = new Observable
-        this._userObservable = new Observable
-        this._user = undefined
-        
-        this._repeater.execute(async () => {
-            if (this._user) {
-                try {
-                    const events = await this._updateRepository.execute({user: this._user})
+  constructor(updateRepository) {
+    this._updateRepository = updateRepository
+    // TODO: Fix this dependency
+    this._repeater = new Repeater({timeout: 1000})
+    this._eventsObservable = new Observable()
+    this._userObservable = new Observable()
+    this._user = undefined
 
-                    //produce messages       
-                    events.forEach(item => {
-                        this._eventsObservable.notify(item)
-                    })
-                } catch (error) {
-                    if (error instanceof UnauthorizedError) {
-                        this.setUser({user: undefined})
-                    }
-                }              
-            }
-        })
-    }
+    this._repeater.execute(async () => {
+      if (this._user) {
+        try {
+          const events = await this._updateRepository.execute({
+            user: this._user
+          })
 
-    on(callback) {
-        this._eventsObservable.subscribe(callback)
-    }
+          // produce messages
+          events.forEach(item => {
+            this._eventsObservable.notify(item)
+          })
+        } catch (error) {
+          if (error instanceof UnauthorizedError) {
+            this.setUser({user: undefined})
+          }
+        }
+      }
+    })
+  }
 
-    //DEPRECATED
-    subscribe({onChange}) {
-        console.log('UpdateService.subscribe is deprecated and will soon be removed, use .on instead')
-        this._eventsObservable.subscribe(onChange)
-    }
+  on(callback) {
+    this._eventsObservable.subscribe(callback)
+  }
 
-    setUser({user}) {
-        this._user = user
-        this._userObservable.notify(user)
-    }
+  // DEPRECATED
+  subscribe({onChange}) {
+    console.log(
+      'UpdateService.subscribe is deprecated and will soon be removed, use .on instead'
+    )
+    this._eventsObservable.subscribe(onChange)
+  }
 
-    onUserChanged(callback) {
-        this._userObservable.subscribe(callback)
-    }
+  setUser({user}) {
+    this._user = user
+    this._userObservable.notify(user)
+  }
 
+  onUserChanged(callback) {
+    this._userObservable.subscribe(callback)
+  }
 }
-
 
 export default UpdateService
